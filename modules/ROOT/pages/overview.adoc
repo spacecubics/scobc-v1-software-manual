@@ -36,6 +36,10 @@ it is organized across the device’s heterogeneous compute
 resources. Because the module includes multiple processor classes,
 each has its own section and build, boot, and validation guidance.
 
+The first section covers setup and preparation. In addition to the
+SC-OBC Module V1, you will need a few items to use the OBC. You will
+also set up your development environment.
+
 The section on the AMD Versal application processors (dual Arm
 Cortex-A72) explains how to build U-Boot and Linux with the Yocto
 Project or AMD PetaLinux, and how to boot from an SD card. It outlines
