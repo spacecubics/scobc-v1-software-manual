@@ -1,0 +1,58 @@
+= Overview
+
+
+== What is SC-OBC Moudle V1
+
+The SC-OBC Module V1 is a modular onboard computer for space missions
+that need reliable real-time control and edge processing. It is built
+around an AMD Versal Adaptive SoC and a Microchip IGLOO2 FPGA, and is
+designed for harsh environments such as Earth orbit and lunar
+missions.
+
+On the Versal side, the SC-OBC V1 leverages the device’s heterogeneous
+architecture, combining dual-core Arm Cortex-A72 application
+processors and dual-core Arm Cortex-R5F real-time processors with
+programmable logic, AI Engines, and DSP engines. This enables on-orbit
+workloads such as object detection, image compression and
+segmentation, and high-speed signal processing, while keeping
+flight-critical tasks on the real-time processors with a predictable
+scheduling model.
+
+On the IGLOO2 side, the SC-OBC V1 uses the device as the board’s
+safety processor, supervising the main system, providing independent
+watchdog and fault-management paths, and coordinating safe-mode
+transitions to improve fault tolerance.
+
+== Evaluation Board
+
+Because SC-OBC Module V1 is a modular OBC, users must at least have
+some kind of I/O board or base board to power the OBC. In this
+document we assume that you have XXXXXX.
+
+== About This Document
+
+This document describes the software for the SC-OBC Module V1 and how
+it is organized across the device’s heterogeneous compute
+resources. Because the module includes multiple processor classes,
+each has its own section and build, boot, and validation guidance.
+
+The section on the AMD Versal application processors (dual Arm
+Cortex-A72) explains how to build U-Boot and Linux with the Yocto
+Project or AMD PetaLinux, and how to boot from an SD card. It outlines
+the standard Versal boot flow where PLM hands off to TF-A, then U-Boot
+loads Linux, and it notes that SD boot is a supported sequence.
+
+The section on the AMD Versal real-time processors (dual Arm
+Cortex-R5F) focuses on Zephyr RTOS for flight-critical workloads that
+require deterministic behavior and predictable scheduling. It covers
+building and running Zephyr on the R5F cores in lockstep mode.
+
+== Ohter Documents
+
+* https://spacecubics.github.io/sc-docs/scobc-v1-product-manual/latest/index.html[SC-OBC Module V1 Product Manual]
+* https://spacecubics.github.io/sc-docs/scobc-v1-fpga-technical-reference-manual/latest/index.html[SC-OBC Module V1 FPGA Technical Reference Manual]
+* https://docs.amd.com/r/en-US/am011-versal-acap-trm[Versal Adaptive SoC Technical Reference Manual (AM011)]
+* https://docs.amd.com/r/en-US/am012-versal-register-reference[Register reference for Versal Adaptive SoC Devices (AM012)]
+* https://docs.amd.com/r/en-US/ug1304-versal-acap-ssdg[Versal Adaptive SoC System Software Developers Guide (UG1304)]
+* https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide[Bootgen User Guide (UG1283)]
+* https://docs.amd.com/r/2025.1-English/ug1725-xsdb-reference-guide/Software-Debugger-XSDB[Software Debugger Reference Guide (UG1725)]
