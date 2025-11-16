@@ -80,5 +80,14 @@ $ bootgen -arch versal -image mytest.bif -w -o boot.bin
 installed it and `source` the setup script before use.
 
 Generated `boot.bin` can be placed on a SD card or can be written to
-one of the SPI NOR flash memories. See Versal documentations for more
-details.
+one of the SPI NOR flash memories.
+
+To load the PDI from SD card, you have to set the boot MODE [3:0] pins
+to "SD0 v3.0" or "0011" by setting SW1 of V1 Carrier Board
+SC-MPN-0062A to "OFF OFF ON ON".
+
+To load the PDI from one of the SPI Flash memories , you have to set
+the boot MODE [3:0] pins to "QSPI32" or "0010" by setting SW1 of V1
+Carrier Board SC-MPN-0062A to "OFF OFF ON OFF".
+
+See Versal documentations for more details.
