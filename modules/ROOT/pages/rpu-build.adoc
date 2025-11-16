@@ -25,7 +25,8 @@ Make sure you are using the branch.
 To run Zephyr RTOS, you can use `west flash`.
 
 For this step, we assume assume that the boot MODE is set to JTAG,
-which means that `SW1` is set to all `ON`.
+which means that `SW1` is set to all `ON`. See SC-OBC Module V1
+Product Manual for more details.
 
 Currently, for any AMD Versal based board including SC-OBC Module V1, `west
 flash` requires you to have a valid PDI.
