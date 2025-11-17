@@ -55,3 +55,5 @@ following path:
 ----
 meta-scobc/meta-scobc-v1/recipes-bsp/hdf/files/sc_obc_v1_versal.xsa
 ----
+
+You can also update `HDF_URI` variable to point to a new XSA file.
