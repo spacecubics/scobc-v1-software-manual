@@ -1,5 +1,7 @@
 === Building a PetaLinux Image for the APU
 
+include::link-attributes.adoc[]
+
 ==== Setup the Build Environment
 
 [source,  bash]
