@@ -44,3 +44,14 @@ build/tmp/deploy/images/scobc-v1/sc-image-minimal-scobc-v1.wic@
 ----
 
 NOTE: `sc-image-minimal-scobc-v1.wic` is a symlink to the latest build.
+
+==== Build with New XSA File
+
+When you update Versal configuration or add FPGA logic, you must
+update the XSA file with your own. `meta-scobc` has a XSA file at the
+following path:
+
+[source]
+----
+meta-scobc/meta-scobc-v1/recipes-bsp/hdf/files/sc_obc_v1_versal.xsa
+----
