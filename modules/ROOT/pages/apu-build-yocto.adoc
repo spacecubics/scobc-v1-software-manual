@@ -2,6 +2,13 @@
 
 include::link-attributes.adoc[]
 
+Our Linux software stack is based on {yocto-org}[the Yocto project].
+
+In order to build it, we use {kas-github}[`kas`], which fetches and
+builds bitbake based project. If you already know about Yocto, you
+don't have to use `kas`. Our layer, `meta-scobc`, can be used as a
+regular yocto layer.
+
 ==== Setup the Build Environment
 
 [source,  bash]
@@ -21,7 +28,7 @@ $ cd meta-scobc
 NOTE: `meta-scobc` uses {git-lfs}[Git Large File Storage (Git
 LFS)]. Make sure you install it.
 
-==== Install and enable the required Python packages
+==== Install and Enable the Required Python Packages
 
 [source,  bash]
 ----
@@ -29,7 +36,10 @@ $ uv sync
 $ source .venv/bin/activate
 ----
 
-==== Build the minimal image
+==== Build the Minimal Image
+
+With `kas`, it's easier than bitbake to build the whole system. Just
+let it do the work with the following command.
 
 [source,  bash]
 ----
