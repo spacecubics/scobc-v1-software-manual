@@ -71,7 +71,7 @@ It also has `libgpiod` python3 bindings.
 
 ==== eMMC
 
-If Linux detectec the eMMC, you can see the device file:
+If Linux detected the eMMC, you can see the device file:
 
 ----
 # ls /dev/mmcblk1

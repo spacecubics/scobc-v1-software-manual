@@ -1,7 +1,7 @@
 = Overview
 
 
-== What is SC-OBC Moudle V1
+== What is SC-OBC Module V1
 
 image::scobc-v1.webp[align="center"]
 
