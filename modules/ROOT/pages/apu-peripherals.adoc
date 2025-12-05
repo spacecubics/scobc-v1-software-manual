@@ -51,19 +51,19 @@ In `sc-image-dev`, you can use the `gpiod` tools to control GPIOs.
 ===== Set GPIO(`PMC_MIO12`)
 
 ----
-# gpiowrite -c 1 12=1
+# gpioset -c 1 12=1
 ----
 
 ===== Clear GPIO(`PMC_MIO12`)
 
 ----
-# gpiowrite -c 1 12=0
+# gpioset -c 1 12=0
 ----
 
 ===== Read GPIO(`PMC_MIO12`)
 
 ----
-# gpioread -c 1 12
+# gpioget -c 1 12
 active
 ----
 
