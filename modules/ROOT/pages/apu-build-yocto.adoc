@@ -43,6 +43,13 @@ $ sudo apt install binutils chrpath cpio diffstat file g++ gawk gcc \
                    rpcsvc-proto zstd
 ----
 
+Next, install `uv`, which is a tool to manage Python virtual environments.
+
+[source,  bash]
+----
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
+----
+
 ==== Clone the Repository
 
 [source,  bash]
