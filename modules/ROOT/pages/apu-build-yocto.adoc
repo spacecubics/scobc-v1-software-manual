@@ -11,11 +11,36 @@ regular yocto layer.
 
 ==== Setup the Build Environment
 
+The `meta-xilinx-tool` layer depends on some packages that are not available in Ubuntu 24.04.
+
+To install them, you need to add Ubuntu 22.04 (Jammy) repositories to your system.
+
+[source,  bash]
+----
+$ sudo tee /etc/apt/sources.list.d/jammy.list << 'EOF'
+deb http://archive.ubuntu.com/ubuntu jammy main universe
+deb http://archive.ubuntu.com/ubuntu jammy-updates main universe
+deb http://security.ubuntu.com/ubuntu jammy-security main universe
+EOF
+$ sudo tee /etc/apt/preferences.d/jammy-pin << 'EOF'
+Package: *
+Pin: release a=jammy
+Pin-Priority: -1
+
+Package: libncurses5 libtinfo5
+Pin: release a=jammy
+Pin-Priority: 990
+EOF
+----
+
+Then, install the required packages.
+
 [source,  bash]
 ----
 $ sudo apt update
 $ sudo apt install binutils chrpath cpio diffstat file g++ gawk gcc \
-                   git git-lfs lz4 make python3 rpcsvc-proto zstd
+                   git git-lfs libncurses5 libtinfo5 lz4 make python3 \
+                   rpcsvc-proto zstd
 ----
 
 ==== Clone the Repository
