@@ -20,3 +20,49 @@ This means that on your Linux development PC, you usually see:
 - USB-Serial PORT 2: /dev/ttyUSB1: Versal UART0 (U-Boot and Linux Console)
 - USB-Serial PORT 3: /dev/ttyUSB2: Versal UART1 (Zephyr Console)
 - USB-Serial PORT 4: /dev/ttyUSB3: IGLOO2 UART
+
+=== Boot Modes
+
+The SC-OBC Module V1 development board has `SW1` to select the Versal
+boot mode.
+
+image::sw1.webp["SW1"]
+
+Each switch is directly connected to the Versal `MODE[3:0]` pins.
+
+[cols="1,1,1,1"]
+|===
+|
+| JTAG
+| QSPI32 (NOR Flash)
+| SD v3.0 (microSD)
+
+| MODE3
+| ON
+| ON
+| ON
+
+| MODE2
+| ON
+| ON
+| ON
+
+| MODE1
+| ON
+| OFF
+| OFF
+
+| MODE0
+| ON
+| ON
+| OFF
+|===
+
+All other settings are prohibited and are not supported on SC-OBC
+Module V1.
+
+:boot-mode: https://docs.amd.com/r/en-US/am011-versal-acap-trm/Boot-Modes-and-Interfaces
+
+For more details on Versal boot modes and boot interfaces, consult the
+{boot-mode}[Boot Modes and Interfaces] section of the Versal Adaptive
+SoC Technical Reference Manual (AM011).
