@@ -1,7 +1,7 @@
-== APU / Linux
+= APU / Linux
 
-include::apu-build-yocto.adoc[]
+include::apu-build-yocto.adoc[leveloffset=+1]
 
-include::apu-sd-boot.adoc[]
+include::apu-sd-boot.adoc[leveloffset=+1]
 
-include::apu-peripherals.adoc[]
+include::apu-peripherals.adoc[leveloffset=+1]

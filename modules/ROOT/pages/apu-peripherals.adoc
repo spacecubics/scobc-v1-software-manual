@@ -1,6 +1,6 @@
-=== Accessing Peripherals
+= Accessing Peripherals
 
-==== Build the dev image
+== Build the dev image
 
 To try out more peripherals, you can build the `sc-image-dev` image.
 
@@ -24,7 +24,7 @@ build/tmp/deploy/images/scobc-v1/sc-image-dev-scobc-v1-yyyyMMddHHmmss.wic
 build/tmp/deploy/images/scobc-v1/sc-image-dev-scobc-v1.wic@
 ----
 
-==== Ethernet
+== Ethernet
 
 You can use `ip` command to assign an IP address. Once the device is
 up, you can use any network applications.
@@ -36,7 +36,7 @@ up, you can use any network applications.
 # ip link set dev end0 up
 ----
 
-==== USB
+== USB
 
 If you have a USB memory, you can mount it like this:
 
@@ -44,23 +44,23 @@ If you have a USB memory, you can mount it like this:
 # mount /dev/sda1 /mnt
 ----
 
-==== GPIO
+== GPIO
 
 In `sc-image-dev`, you can use the `gpiod` tools to control GPIOs.
 
-===== Set GPIO(`PMC_MIO12`)
+=== Set GPIO(`PMC_MIO12`)
 
 ----
 # gpioset -c 1 12=1
 ----
 
-===== Clear GPIO(`PMC_MIO12`)
+=== Clear GPIO(`PMC_MIO12`)
 
 ----
 # gpioset -c 1 12=0
 ----
 
-===== Read GPIO(`PMC_MIO12`)
+=== Read GPIO(`PMC_MIO12`)
 
 ----
 # gpioget -c 1 12
@@ -69,7 +69,7 @@ active
 
 It also has `libgpiod` python3 bindings.
 
-==== eMMC
+== eMMC
 
 If Linux detected the eMMC, you can see the device file:
 
@@ -123,7 +123,7 @@ and use it.
 ----
 
 
-==== microSD card
+== microSD card
 
 It's the same as eMMC. If Linux detectec a SD card, you can see the
 device file:
@@ -136,7 +136,7 @@ device file:
 ----
 
 
-==== SPI NOR Flash
+== SPI NOR Flash
 
 Under Linux, SPI NOR Flash Memory is a MTD device. If Linux detected
 the device you can see the device like this:
@@ -155,20 +155,20 @@ to it. Both points to the same device.
 See http://www.linux-mtd.infradead.org/faq/general.html#L_mtd_what for
 more info.
 
-===== Write and read data
+=== Write and read data
 
 ----
 # echo "SPI NOR Flash 1" > /dev/mtd0
 # hexdump -C /dev/mtd0
 ----
 
-===== Erase all sectors
+=== Erase all sectors
 
 ----
 # flash_erase /dev/mtd0 0 0
 ----
 
-===== Switch banks
+=== Switch banks
 
 SC-OBC Module V1 has two SPI NOR Flash banks.
 You can switch between them by controlling `QSPI_MEM_SEL`(`PMC_MIO50`) pin.
@@ -197,7 +197,7 @@ You can switch between them by controlling `QSPI_MEM_SEL`(`PMC_MIO50`) pin.
 *
 ----
 
-==== RTC
+== RTC
 
 ----
 # hwclock -s
