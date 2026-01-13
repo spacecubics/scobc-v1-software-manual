@@ -1,4 +1,4 @@
-== Setup the Development Environment
+= Setup the Development Environment
 
 include::link-attributes.adoc[]
 
@@ -7,7 +7,7 @@ from the Zephyr official documentation. If you are already familiar
 with Zephyr development environment, you can safely skip this section.
 
 
-=== Install Required Dependencies
+== Install Required Dependencies
 
 [source,  bash]
 ----
@@ -19,7 +19,7 @@ $ sudo apt install --no-install-recommends git cmake ninja-build gperf \
     make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
 ----
 
-=== Setup a Workspace
+== Setup a Workspace
 
 Create your working directory and a new virtual environment.
 
@@ -30,7 +30,7 @@ $ python3 -m venv .venv
 $ source .venv/bin/activate
 ----
 
-=== Install the West
+== Install the West
 
 Once venv is activated, we can install West locally.
 
@@ -39,7 +39,7 @@ Once venv is activated, we can install West locally.
 $ pip install west
 ----
 
-=== Clone Zephyr Repository
+== Clone Zephyr Repository
 
 From here, we can use `west` to do most of the works.
 
@@ -50,21 +50,21 @@ $ west update
 $ west zephyr-export
 ----
 
-=== Install the Python Requirements
+== Install the Python Requirements
 
 [source, bash]
 ----
 $ west packages pip --install
 ----
 
-=== Install the Zephyr SDK
+== Install the Zephyr SDK
 
 [source, bash]
 ----
 $ west sdk install
 ----
 
-=== Install Udev Rules
+== Install Udev Rules
 
 Install the udev rules, which allow you to flash most Zephyr boards as a regular user.
 
@@ -75,7 +75,7 @@ sudo cp ~/zephyr-sdk-[VERSION]/sysroots/x86_64-pokysdk-linux/usr/share/openocd/c
 sudo udevadm control --reload
 ----
 
-=== Install the tio Package
+== Install the tio Package
 
 Although there are several tools available for working with a serial
 console, this document uses {tio-github}[`tio`, a serial device I/O tool].

@@ -1,6 +1,6 @@
-== Building and Running Zephyr RTOS for SC-OBC Module V1
+= Building and Running Zephyr RTOS for SC-OBC Module V1
 
-=== Building Zephyr RTOS for SC-OBC Module V1
+== Building Zephyr RTOS for SC-OBC Module V1
 
 To build Zephyr RTOS for SC-OBC Module V1 is the same as any other
 board. All you have to do is to specify SC-OBC Module V1 (`scobc_v1`)
@@ -12,7 +12,7 @@ $ cd ~/myproject/zephyr
 $ west build -b scobc_v1 samples/hello_world
 ----
 
-=== Running Zephyr RTOS on SC-OBC Module V1
+== Running Zephyr RTOS on SC-OBC Module V1
 
 To run Zephyr RTOS, you can use `west flash`.
 
@@ -36,7 +36,7 @@ IMPORTANT: `west flash` for Versal-based board uses `xsdb`, instead of
 popular OpenOCD, for it's backend. This means that you must have
 `xsdb` in one of your `PATH` environment variable directories.
 
-=== Creating a PDI with Zephyr RTOS
+== Creating a PDI with Zephyr RTOS
 
 You can create a PDI with Zephyr RTOS in it. The PDI, then, can be
 load from any boot device Versal supports.

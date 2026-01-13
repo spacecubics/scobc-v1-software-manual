@@ -3,6 +3,6 @@
 In this section we show you how to run Zephyr RTOS on RPU in lock-step
 mode.
 
-include::rpu-setup.adoc[]
+include::rpu-setup.adoc[leveloffset=+1]
 
-include::rpu-build.adoc[]
+include::rpu-build.adoc[leveloffset=+1]
