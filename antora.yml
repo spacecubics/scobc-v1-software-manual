@@ -2,3 +2,5 @@ name: scobc-v1-software-manual
 title: SC-OBC Module V1 Software Manual
 version: "latest"
 start_page: index.adoc
+nav:
+  - modules/ROOT/nav.adoc

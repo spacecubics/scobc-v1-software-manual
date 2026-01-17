@@ -1,11 +1,3 @@
-:sectnums:
-
 = SC-OBC Module V1 Software Manual
 
 include::overview.adoc[leveloffset=+1]
-
-include::setup.adoc[leveloffset=+1]
-
-include::rpu.adoc[leveloffset=+1]
-
-include::apu.adoc[leveloffset=+1]
