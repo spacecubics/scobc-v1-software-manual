@@ -83,7 +83,7 @@ $ kas build kas/scobc-v1.yml
 
 [source,  bash]
 ----
-$ ls -l build/tmp/deploy/images/scobc-v1/*wic
+$ ls -1F build/tmp/deploy/images/scobc-v1/*.wic
 build/tmp/deploy/images/scobc-v1/sc-image-minimal-scobc-v1-yyyyMMddHHmmss.wic
 build/tmp/deploy/images/scobc-v1/sc-image-minimal-scobc-v1.wic@
 ----
