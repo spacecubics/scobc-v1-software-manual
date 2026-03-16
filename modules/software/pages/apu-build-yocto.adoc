@@ -74,31 +74,23 @@ $ source .venv/bin/activate
 With `kas`, it's easier than bitbake to build the whole system. Just
 let it do the work with the following command.
 
+NOTE: From `meta-scobc` version `scobc-v1-v0.3.0`,
+SDT(System Device Tree)-based builds are the default.
+
 [source,  bash]
 ----
 $ kas build kas/scobc-v1.yml
 ----
 
-`build/tmp/deploy/images/scobc-v1/` will contain the generated image files.
+`build/tmp/deploy/images/versal-scobc-v1-ve2302i-sdt-full/` will contain
+the generated image files.
 
 [source,  bash]
 ----
-$ ls -1F build/tmp/deploy/images/scobc-v1/*.wic
-build/tmp/deploy/images/scobc-v1/sc-image-minimal-scobc-v1-yyyyMMddHHmmss.wic
-build/tmp/deploy/images/scobc-v1/sc-image-minimal-scobc-v1.wic@
+$ ls -1F build/tmp/deploy/images/versal-scobc-v1-ve2302i-sdt-full/*.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302i-sdt-full/sc-image-minimal-versal-scobc-v1-ve2302i-sdt-full-yyyyMMddHHmmss.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302i-sdt-full/sc-image-minimal-versal-scobc-v1-ve2302i-sdt-full.wic@
 ----
 
-NOTE: `sc-image-minimal-scobc-v1.wic` is a symlink to the latest build.
-
-== Build with New XSA File
-
-When you update Versal configuration or add FPGA logic, you must
-update the XSA file with your own. `meta-scobc` has a XSA file at the
-following path:
-
-[source]
-----
-meta-scobc/meta-scobc-v1/recipes-bsp/hdf/files/sc_obc_v1_versal.xsa
-----
-
-You can also update `HDF_URI` variable to point to a new XSA file.
+NOTE: `sc-image-minimal-versal-scobc-v1-ve2302i-sdt-full.wic` is a symlink to
+the latest build.
