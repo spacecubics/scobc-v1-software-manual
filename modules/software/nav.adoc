@@ -3,3 +3,4 @@
 * xref:setup.adoc[]
 * xref:rpu.adoc[]
 * xref:apu.adoc[]
+** xref:apu-build-yocto-xsct.adoc[]

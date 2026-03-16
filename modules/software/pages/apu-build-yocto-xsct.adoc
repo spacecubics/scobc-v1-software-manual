@@ -1,0 +1,71 @@
+= Building a PetaLinux Image with XSCT
+
+include::link-attributes.adoc[]
+
+IMPORTANT: Currently, `meta-scobc` uses `meta-petalinux` version `xlnx-rel-v2025.1`.
+But building with XSCT has been deprecated since `meta-petalinux` version `xlnx-rel-v2025.2`.
+This means that XSCT will no longer be available for builds in the future releases.
+We recommend using SDT(System Device Tree) build instead.
+
+== Build the Minimal Image
+
+=== For Space Grade
+
+[source,  bash]
+----
+$ kas build kas/scobc-v1-xsct.yml
+----
+
+`build/tmp/deploy/images/versal-scobc-v1-ve2302i-xsct-full/` will contain
+the generated image files.
+
+[source,  bash]
+----
+$ ls -1F build/tmp/deploy/images/versal-scobc-v1-ve2302i-xsct-full/*.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302i-xsct-full/sc-image-minimal-versal-scobc-v1-ve2302i-xsct-full-yyyyMMddHHmmss.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302i-xsct-full/sc-image-minimal-versal-scobc-v1-ve2302i-xsct-full.wic@
+----
+
+NOTE: `sc-image-minimal-versal-scobc-v1-ve2302i-xsct-full.wic` is a symlink to
+the latest build.
+
+=== For Developer's Grade
+
+[source,  bash]
+----
+$ kas build kas/scobc-v1-devgrade-xsct.yml
+----
+
+`build/tmp/deploy/images/versal-scobc-v1-ve2302e-xsct-full/` will contain
+the generated image files.
+
+[source,  bash]
+----
+$ ls -1F build/tmp/deploy/images/versal-scobc-v1-ve2302e-xsct-full/*.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302e-xsct-full/sc-image-minimal-versal-scobc-v1-ve2302e-xsct-full-yyyyMMddHHmmss.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302e-xsct-full/sc-image-minimal-versal-scobc-v1-ve2302e-xsct-full.wic@
+----
+
+NOTE: `sc-image-minimal-versal-scobc-v1-ve2302e-xsct-full.wic` is a symlink to
+the latest build.
+
+== Build with New XSA Files
+
+When you update Versal configuration or add FPGA logic, you must
+update the XSA file with your own. `meta-scobc` has XSA files under
+`meta-scobc/meta-scobc-v1/recipes-bsp/hdf/files/` directory with the
+following names:
+
+[cols="1,2",options="header"]
+|===
+^|Model ^|File Name
+
+|Space Grade
+^|`versal-scobc-v1-ve2302i.xsa`
+
+|Developer's Grade
+^|`versal-scobc-v1-ve2302e.xsa`
+
+|===
+
+You can also update `HDF_URI` variable to point to a new XSA file.
