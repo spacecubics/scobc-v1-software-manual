@@ -77,6 +77,8 @@ let it do the work with the following command.
 NOTE: From `meta-scobc` version `scobc-v1-v0.3.0`,
 SDT(System Device Tree)-based builds are the default.
 
+=== For Space Grade
+
 [source,  bash]
 ----
 $ kas build kas/scobc-v1.yml
@@ -93,4 +95,24 @@ build/tmp/deploy/images/versal-scobc-v1-ve2302i-sdt-full/sc-image-minimal-versal
 ----
 
 NOTE: `sc-image-minimal-versal-scobc-v1-ve2302i-sdt-full.wic` is a symlink to
+the latest build.
+
+=== For Developer's Grade
+
+[source,  bash]
+----
+$ kas build kas/scobc-v1-devgrade.yml
+----
+
+`build/tmp/deploy/images/versal-scobc-v1-ve2302e-sdt-full/` will contain
+the generated image files.
+
+[source,  bash]
+----
+$ ls -1F build/tmp/deploy/images/versal-scobc-v1-ve2302e-sdt-full/*.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302e-sdt-full/sc-image-minimal-versal-scobc-v1-ve2302e-sdt-full-yyyyMMddHHmmss.wic
+build/tmp/deploy/images/versal-scobc-v1-ve2302e-sdt-full/sc-image-minimal-versal-scobc-v1-ve2302e-sdt-full.wic@
+----
+
+NOTE: `sc-image-minimal-versal-scobc-v1-ve2302e-sdt-full.wic` is a symlink to
 the latest build.
