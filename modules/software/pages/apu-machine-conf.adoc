@@ -1,0 +1,322 @@
+= Generating Machine Configuration
+
+When building Linux with Yocto for Xilinx SoC platforms,
+a machine configuration is required to describe the hardware information.
+
+The hardware design is exported from Vivado as an XSA (Xilinx Support Archive).
+Xilinx provides tools to generate the required machine configuration from this XSA.
+
+There are two flows to generate the machine configuration:
+
+* SDT flow (recommended)
+* XSCT flow (deprecated)
+
+In the SDT flow, the XSA is converted to an SDT (System Device Tree),
+and the machine configuration is generated from the SDT.
+
+In the XSCT flow, the machine configuration is generated directly from the
+XSA using XSCT.
+
+The SDT flow is the recommended method in recent Xilinx releases,
+starting from v2024.2.
+
+This document explains both flows and the structure of the generated
+machine configuration.
+
+== Environment Setup
+
+Before generating the machine configuration, prepare the build environment.
+
+=== Clean previous output directory
+
+If `gen-machine-conf` was executed previously, remove the `output`
+directory before running it again.
+
+[IMPORTANT]
+====
+If the output directory remains, the generated files may reuse the
+previous machine name or configuration.
+This is a known issue in `gen-machine-conf`.
+Always remove the output directory before regenerating the configuration.
+====
+
+[source,console]
+----
+$ rm -rf output
+----
+
+=== Checkout Yocto sources
+
+Fetch the required layers such as `meta-xilinx` using a kas configuration file.
+
+It is recommended to use the configuration file that matches the build flow.
+
+Example (SDT flow):
+
+[source,console]
+----
+$ uv run kas checkout kas/scobc-v1.yml
+----
+
+Example (XSCT flow):
+
+[source,console]
+----
+$ uv run kas checkout kas/scobc-v1-xsct.yml
+----
+
+=== Initialize submodules
+
+`gen-machine-conf` is included as a git submodule in `meta-xilinx`,
+so it must be initialized.
+
+[source,console]
+----
+$ pushd sources/meta-xilinx
+$ git submodule update --init --recursive
+$ popd
+----
+
+=== Enable gen-machine-conf
+
+`gen-machine-conf` uses BitBake, so the Yocto environment must be initialized.
+
+[source,console]
+----
+$ source sources/poky/oe-init-build-env
+$ export PATH=$PATH:$(pwd)/sources/meta-xilinx/meta-xilinx-core/gen-machine-conf
+----
+
+=== Enable sdtgen
+
+`sdtgen` is required for the SDT flow.
+
+It is provided by Xilinx Vivado or Vitis.
+
+[source,console]
+----
+$ source /opt/xilinx/2025.1/Vitis/settings64.sh
+----
+
+[#sdt_flow]
+== SDT flow
+
+In the SDT flow, the machine configuration is generated from an SDT
+(System Device Tree), which is created from the XSA exported by Vivado.
+
+=== Generating SDT from XSA
+
+Generate an SDT from the XSA exported from Vivado.
+
+A generic TCL script for SDT generation is provided at:
+
+----
+scripts/gen-sdt.tcl
+----
+
+Run `sdtgen` with the following arguments:
+
+[source,console]
+----
+$ sdtgen scripts/gen-sdt.tcl <path-to-xsa> <path-to-generating-sdt-path>
+----
+
+|===
+| Argument | Description
+
+| `<path-to-xsa>`
+| Path to the XSA file exported from Vivado
+
+| `<path-to-generating-sdt-path>`
+| Output directory where the SDT will be generated
+
+|===
+
+=== Generating machine configuration from SDT
+
+After generating the SDT, use `gen-machine-conf parse-sdt` to create the machine
+configuration from SDT.
+
+[source,console]
+----
+$ gen-machine-conf parse-sdt \
+  --hw-description <path-to-generating-sdt-path> \
+  --machine-name <machine-name> \
+  -c <conf-path> \
+  -g <pl-overlay>
+----
+
+|===
+| Option | Description
+
+| `--hw-description`
+| Path to the generated SDT directory
+
+| `--machine-name`
+| Name of the machine configuration
+
+| `-c <conf-path>`
+| Path to the `conf` directory where the machine will be generated
+
+| `-g <pl-overlay>`
+| PL overlay generation mode
+
+|===
+
+The `conf-path` specifies the Yocto configuration directory.
+
+Examples:
+
+----
+build/conf
+meta-scobc-v1/conf
+----
+
+=== Machine name format
+
+We use the following machine configuration naming convention,
+based on the Xilinx naming style:
+
+----
+<soc>-<platform>-<variant>-<flow>-<feature>
+----
+
+==== Components
+
+|===
+| Component | Description
+
+| soc
+| SoC family
+
+| platform
+| SC-OBC platform generation (example: `scobc-v1`)
+
+| variant
+| Hardware variant (example: `ve2302e`, `ve2002e`)
+
+| flow
+| Build flow (`sdt` or `xsct`)
+
+| feature
+| PL overlay mode (example: `full`, `dfx`)
+|===
+
+=== PL overlay mode
+
+The `-g` option selects the PL overlay generation mode.
+
+|===
+| Mode | Description
+
+| full
+| PL is included in the base image
+
+| dfx
+| PL is loaded dynamically using DFX
+|===
+
+=== Example
+
+[source,console]
+----
+$ sdtgen scripts/gen-sdt.tcl \
+  meta-scobc-v1/recipes-bsp/hdf/files/versal-scobc-v1-ve2302i.xsa \
+  meta-scobc-v1/recipes-bsp/sdt/files/versal-scobc-v1-ve2302i
+
+$ gen-machine-conf parse-sdt \
+  --hw-description meta-scobc-v1/recipes-bsp/sdt/files/versal-scobc-v1-ve2302i \
+  --machine-name versal-scobc-v1-ve2302i-sdt-full \
+  -c meta-scobc-v1/conf \
+  -g full
+----
+
+[IMPORTANT]
+====
+If the machine configuration already exists, running `gen-machine-conf`
+will overwrite the existing files.
+
+Any manual changes made to the machine configuration may be lost.
+
+If you accidentally overwrite the file, you can restore it using Git:
+
+[source,console]
+----
+$ git restore meta-scobc-v1/conf/machine/<machine-name>.conf
+----
+====
+
+== XSCT flow
+
+[IMPORTANT]
+====
+The XSCT flow is a legacy flow.
+
+For new projects, use the <<sdt_flow,SDT Flow>> instead.
+The XSCT flow is kept here for compatibility with existing projects.
+====
+
+In the XSCT flow, the machine configuration is generated directly from
+the XSA exported from Vivado.
+
+=== Generating machine configuration from XSA
+
+Use `gen-machine-conf parse-xsa` to generate the machine configuration
+directly from an XSA file.
+
+[source,console]
+----
+$ gen-machine-conf parse-xsa \
+  --hw-description <path-to-xsa> \
+  --machine-name <machine-name> \
+  -c <conf-path>
+----
+
+|===
+| Option | Description
+
+| `--hw-description`
+| Path to the XSA file exported from Vivado
+
+| `--machine-name`
+| Name of the machine configuration
+
+| `-c <conf-path>`
+| Path to the `conf` directory where the machine configuration will be generated
+|===
+
+The `conf-path` specifies the Yocto configuration directory.
+
+Examples:
+
+----
+build/conf
+meta-scobc-v1/conf
+----
+
+The machine configuration naming convention is the same as for the SDT flow.
+
+=== Example
+
+[source,console]
+----
+$ gen-machine-conf parse-xsa \
+  --hw-description meta-scobc-v1/recipes-bsp/hdf/files/versal-scobc-v1-ve2302i.xsa \
+  --machine-name versal-scobc-v1-ve2302i-xsct-full \
+  -c meta-scobc-v1/conf
+----
+
+[IMPORTANT]
+====
+If the machine configuration already exists, running `gen-machine-conf`
+will overwrite the existing files.
+
+Any manual changes made to the machine configuration may be lost.
+
+If you accidentally overwrite the file, you can restore it using Git:
+
+[source,console]
+----
+$ git restore meta-scobc-v1/conf/machine/<machine-name>.conf
+----
+====
