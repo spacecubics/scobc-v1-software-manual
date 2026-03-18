@@ -4,3 +4,4 @@
 * xref:rpu.adoc[]
 * xref:apu.adoc[]
 ** xref:apu-build-yocto-xsct.adoc[]
+** xref:apu-dualboot.adoc[]
