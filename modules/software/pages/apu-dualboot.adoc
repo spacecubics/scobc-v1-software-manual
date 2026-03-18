@@ -1,0 +1,131 @@
+= Dualboot
+
+SC-OBC provides a *dualboot system* for reliable operation and safe software updates.
+
+Two independent system slots are maintained:
+
+* *golden* — recovery system (stable, rarely updated)
+* *main* — primary runtime system (updated during operation)
+
+During updates, the device boots the golden system,
+updates the main system, and then reboots back to main.
+
+This ensures that a valid recovery environment is always available.
+
+== How dualboot works
+
+The update sequence is:
+
+. Boot from *main*
+. Switch to *golden*
+. Install update to *main*
+. Reboot into updated *main*
+
+Because the golden slot is not modified during normal updates,
+the system can always recover from a failed update.
+
+== Partition layout
+
+[source,text]
+----
+boot_golden   VFAT   recovery boot files (BOOT.bin etc.)
+root_golden   EXT4   recovery rootfs
+data          EXT4   shared persistent storage (/srv/data)
+boot_main     VFAT   main boot files
+root_main     EXT4   main rootfs
+----
+
+Description:
+
+* golden partitions are used for recovery and update
+* main partitions are used during normal operation
+* data partition is shared
+
+== Build configuration
+
+Dualboot images are built using `kas`.
+
+[cols="1,3"]
+|===
+| File | Description
+
+| kas/<board>-dualboot.yml
+| Build full dualboot image
+
+| kas/<board>-update-bundle.yml
+| Build update bundle only
+|===
+
+Example:
+
+[source,console]
+----
+uv run kas build kas/scobc-v1-dualboot.yml
+----
+
+== Update bundle
+
+Updates are delivered using *RAUC bundles*.
+
+Example:
+
+[source,console]
+----
+uv run kas build kas/<board>-update-bundle.yml
+----
+
+On device:
+
+[source,console]
+----
+sudo boot-to-golden
+rauc install bundle.raucb
+----
+
+After installation the system reboots automatically.
+
+== Recovery
+
+If the main system fails to boot,
+the device can fall back to the *golden* system.
+
+A hardware watchdog is enabled during boot.
+If Linux stops during startup or fails to reach the normal runtime state,
+the watchdog resets the device automatically.
+
+After reset, the system can boot from the golden slot,
+allowing recovery even if the main system becomes unbootable.
+
+From the golden system you can:
+
+* install a bundle
+* repair the system
+* perform maintenance
+
+== Remote update (Hawkbit)
+
+SC-OBC supports remote updates using Hawkbit for demonstration purposes only.
+
+This feature is provided to demonstrate and evaluate the remote update flow,
+and is not intended to define the update system used in actual deployment.
+
+Set the following variables during build:
+
+[cols="1,3"]
+|===
+| Variable | Description
+
+| HAWKBIT_SERVER_ADDRESS
+| Hawkbit server URL
+
+| HAWKBIT_TENANT_ID
+| Tenant ID
+
+| HAWKBIT_TARGET_NAME
+| Device name
+
+| HAWKBIT_AUTH_TOKEN
+| Auth token
+|===
+
+When configured, the device can download bundles automatically.
