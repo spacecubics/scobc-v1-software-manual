@@ -1,6 +1,6 @@
 = Building a PetaLinux Image for the APU
 
-include::link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
 
 Our Linux software stack is based on {yocto-org}[the Yocto project].
 

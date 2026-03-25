@@ -1,6 +1,6 @@
 = Setup the Development Environment
 
-include::link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
 
 NOTE: This section is mostly the same as the "{zephyr-gsg}[Getting Started Guide]"
 from the Zephyr official documentation. If you are already familiar
