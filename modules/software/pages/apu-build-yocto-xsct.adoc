@@ -1,6 +1,6 @@
 = Building a PetaLinux Image with XSCT
 
-include::link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
 
 IMPORTANT: Currently, `meta-scobc` uses `meta-petalinux` version `xlnx-rel-v2025.1`.
 But building with XSCT has been deprecated since `meta-petalinux` version `xlnx-rel-v2025.2`.
