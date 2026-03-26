@@ -53,7 +53,7 @@ the latest build.
 
 When you update Versal configuration or add FPGA logic, you must
 update the XSA file with your own. `meta-scobc` has XSA files under
-`meta-scobc/meta-scobc-v1/recipes-bsp/hdf/files/` directory with the
+`meta-scobc/meta-scobc/recipes-bsp/hdf/files/` directory with the
 following names:
 
 [cols="1,2",options="header"]
