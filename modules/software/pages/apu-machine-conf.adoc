@@ -169,7 +169,7 @@ Examples:
 
 ----
 build/conf
-meta-scobc-v1/conf
+meta-scobc/conf
 ----
 
 === Machine name format
@@ -221,13 +221,13 @@ The `-g` option selects the PL overlay generation mode.
 [source,console]
 ----
 $ sdtgen scripts/gen-sdt.tcl \
-  meta-scobc-v1/recipes-bsp/hdf/files/versal-scobc-v1-ve2302i.xsa \
-  meta-scobc-v1/recipes-bsp/sdt/files/versal-scobc-v1-ve2302i
+  meta-scobc/recipes-bsp/hdf/files/versal-scobc-v1-ve2302i.xsa \
+  meta-scobc/recipes-bsp/sdt/files/versal-scobc-v1-ve2302i
 
 $ gen-machine-conf parse-sdt \
-  --hw-description meta-scobc-v1/recipes-bsp/sdt/files/versal-scobc-v1-ve2302i \
+  --hw-description meta-scobc/recipes-bsp/sdt/files/versal-scobc-v1-ve2302i \
   --machine-name versal-scobc-v1-ve2302i-sdt-full \
-  -c meta-scobc-v1/conf \
+  -c meta-scobc/conf \
   -g full
 ----
 
@@ -242,7 +242,7 @@ If you accidentally overwrite the file, you can restore it using Git:
 
 [source,console]
 ----
-$ git restore meta-scobc-v1/conf/machine/<machine-name>.conf
+$ git restore meta-scobc/conf/machine/<machine-name>.conf
 ----
 ====
 
@@ -291,7 +291,7 @@ Examples:
 
 ----
 build/conf
-meta-scobc-v1/conf
+meta-scobc/conf
 ----
 
 The machine configuration naming convention is the same as for the SDT flow.
@@ -301,9 +301,9 @@ The machine configuration naming convention is the same as for the SDT flow.
 [source,console]
 ----
 $ gen-machine-conf parse-xsa \
-  --hw-description meta-scobc-v1/recipes-bsp/hdf/files/versal-scobc-v1-ve2302i.xsa \
+  --hw-description meta-scobc/recipes-bsp/hdf/files/versal-scobc-v1-ve2302i.xsa \
   --machine-name versal-scobc-v1-ve2302i-xsct-full \
-  -c meta-scobc-v1/conf
+  -c meta-scobc/conf
 ----
 
 [IMPORTANT]
@@ -317,6 +317,6 @@ If you accidentally overwrite the file, you can restore it using Git:
 
 [source,console]
 ----
-$ git restore meta-scobc-v1/conf/machine/<machine-name>.conf
+$ git restore meta-scobc/conf/machine/<machine-name>.conf
 ----
 ====
