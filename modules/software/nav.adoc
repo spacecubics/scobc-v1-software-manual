@@ -6,3 +6,4 @@
 ** xref:apu-build-yocto-xsct.adoc[]
 ** xref:apu-machine-conf.adoc[]
 ** xref:apu-dualboot.adoc[]
+** xref:apu-custom-layers.adoc[]

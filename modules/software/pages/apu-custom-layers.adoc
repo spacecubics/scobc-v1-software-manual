@@ -1,0 +1,151 @@
+= Using Custom Yocto Layers
+
+When developing with Yocto, it is common to place your own changes
+in a separate layer instead of modifying upstream layers directly.
+
+This makes it easier to:
+
+* avoid conflicts when upstream repositories are updated
+* keep local changes clean
+* reuse recipes and machine configurations
+
+This section shows how to create a custom layer and use it with `kas`.
+
+== Overview
+
+Recommended structure:
+
+----
+build
+sources/
+  meta-scobc	-- upstream layer
+  meta-custom	-- custom layer
+kas/
+  meta-scobc.yml
+  meta-custom.yml
+----
+
+Your own changes should be placed in the custom layer.
+
+== Prepare base kas configuration
+
+Create a working directory.
+
+[source,console]
+----
+$ mkdir meta-custom-work
+$ cd meta-custom-work
+----
+
+Prepare Python environment for kas.
+
+[source,console]
+----
+$ uv init .
+$ uv add kas
+----
+
+Create kas directory.
+
+[source,console]
+----
+$ mkdir kas
+----
+
+Create kas configuration that includes meta-scobc.
+
+.kas/meta-scobc.yml
+[source,yaml]
+----
+header:
+  version: 19
+  includes:
+    - repo: meta-scobc
+      file: kas/scobc-v1.yml
+
+repos:
+  meta-scobc:
+    url: https://github.com/spacecubics/meta-scobc
+    branch: main
+    path: sources/meta-scobc
+    layers:
+      meta-scobc:
+----
+
+Checkout layers.
+
+[source,console]
+----
+$ uv run kas checkout kas/meta-scobc.yml
+
+$ pushd sources/meta-scobc
+$ git lfs pull
+$ popd
+----
+
+== Create custom layer
+
+Enter build environment
+
+[source,console]
+----
+$ source sources/poky/oe-init-build-env
+$ cd ..
+----
+
+or
+
+[source,console]
+----
+$ uv run kas shell kas/meta-scobc.yml
+$ cd ..
+----
+
+Create custom layer using bitbake-layers.
+
+[source,console]
+----
+$ bitbake-layers create-layer sources/meta-custom
+----
+
+Result:
+
+----
+sources/meta-custom/
+├── conf/
+│   └── layer.conf
+├── COPYING.MIT
+├── README
+└── recipes-example/
+----
+
+== Add custom layer to kas configuration
+
+.kas/meta-custom.yml
+[source,yaml]
+----
+header:
+  version: 19
+  includes:
+    - meta-scobc.yml
+
+repos:
+  meta-custom:
+    path: sources/meta-custom
+    layers:
+      .:
+----
+
+Optional: specify machine
+
+[source,yaml]
+----
+machine: <machine-name>
+----
+
+== Build
+
+[source,console]
+----
+$ uv run kas build kas/meta-custom.yml
+----
