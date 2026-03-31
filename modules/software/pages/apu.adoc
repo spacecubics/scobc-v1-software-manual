@@ -1,7 +1,7 @@
 = APU / Linux
 
-include::apu-build-yocto.adoc[leveloffset=+1]
+In this section we show you how to implement, build and run Linux and its
+applications on APU.
 
-include::apu-sd-boot.adoc[leveloffset=+1]
-
-include::apu-peripherals.adoc[leveloffset=+1]
+SC-OBC Module V1 uses Yocto Project. Since its features span a wide range, each
+topic is described separately.
