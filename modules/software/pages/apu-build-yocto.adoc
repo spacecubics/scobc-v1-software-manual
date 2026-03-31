@@ -1,4 +1,4 @@
-= Building a PetaLinux Image for the APU
+= Building a Linux Image with Yocto
 
 include::partial$link-attributes.adoc[]
 
