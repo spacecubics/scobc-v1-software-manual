@@ -97,7 +97,7 @@ build/tmp/deploy/images/versal-scobc-v1-ve2302i-sdt-full/sc-image-minimal-versal
 NOTE: `sc-image-minimal-versal-scobc-v1-ve2302i-sdt-full.wic` is a symlink to
 the latest build.
 
-=== For Developer's Grade
+=== For Developer Grade
 
 [source,  bash]
 ----
