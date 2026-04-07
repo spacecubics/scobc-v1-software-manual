@@ -1,0 +1,10 @@
+= Development Topics
+
+Software development for the SC-OBC Module V1 involves more than
+building target-specific software such as Zephyr RTOS or Linux
+images. It also includes the day-to-day practices needed to develop
+and maintain software effectively, such as debugging, repository and
+branch management, development tools, CI/CD, and static analysis.
+
+This section collects those topics. The pages are organized as
+independent topics, so you do not need to read them in sequence.
