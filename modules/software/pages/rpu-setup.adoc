@@ -41,11 +41,66 @@ $ pip install west
 
 == Clone Zephyr Repository
 
-From here, we can use `west` to do most of the works.
+Zephyr support for this product is available from both the upstream Zephyr
+repository and the Space Cubics fork.
+
+In general, we recommend using the upstream Zephyr repository when the required
+features are already supported there. Use the Space Cubics fork when you need
+features that have not yet been merged upstream.
+
+[cols="1,2"]
+|===
+|Repository
+|URL
+
+|Upstream Zephyr
+|https://github.com/zephyrproject-rtos/zephyr
+
+|Space Cubics fork
+|https://github.com/spacecubics/zephyr
+|===
+
+[cols="1,1,1"]
+|===
+|Feature
+|Upstream Zephyr
+|Space Cubics Fork
+
+|UART
+|✅️
+|✅️
+
+|GPIO
+|✅️
+|✅️(`v2026.05` or later)
+
+|QSPI Configuration Memory
+|TBA
+|TBA
+
+|QSPI Boot Memory
+|TBA
+|TBA
+
+|SPI
+|TBA
+|TBA
+
+|eMMC
+|TBA
+|WIP
+
+|OpenAMP
+|TBA
+|TBA
+|===
+
+After selecting the repository to use, initialize the Zephyr workspace with
+`west`.
 
 [source, bash]
 ----
-$ west init -m https://github.com/zephyrproject-rtos/zephyr
+$ west init -m <URL>
 $ west update
 $ west zephyr-export
 ----
