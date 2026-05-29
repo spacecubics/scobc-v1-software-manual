@@ -3,13 +3,13 @@
 == Building Zephyr RTOS for SC-OBC Module V1
 
 To build Zephyr RTOS for SC-OBC Module V1 is the same as any other
-board. All you have to do is to specify SC-OBC Module V1 (`scobc_v1`)
+board. All you have to do is to specify SC-OBC Module V1 (`scobc_v1/versal_rpu`)
 with the `-b` option to `west build`.
 
 [source,  bash]
 ----
 $ cd ~/myproject/zephyr
-$ west build -b scobc_v1 samples/hello_world
+$ west build -b scobc_v1/versal_rpu samples/hello_world
 ----
 
 == Running Zephyr RTOS on SC-OBC Module V1
