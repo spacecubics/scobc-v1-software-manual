@@ -1,4 +1,4 @@
 = SC-OBC Module V1 Software Manual
 
-This is a git repo for SC-OBC module V1 software manual.
-You can read the doc at https://spacecubics.github.io/sc-docs/[https://spacecubics.github.io/sc-docs/].
+The SC-OBC Module V1 Software Manual describes the software for the SC-OBC
+Module V1. You can read the document at https://docs.spacecubics.com/[https://docs.spacecubics.com/].
